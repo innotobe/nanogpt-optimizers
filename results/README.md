@@ -14,6 +14,36 @@ max_iters=5000, warmup 100 + cosine decay(min_lr = lr/10), seed=1337, eval_inter
   - aux AdamW: wte(lm_head와 tied), wpe, LayerNorm 15개 0.13M 파라미터, (A)와 같은 lr=1e-3, betas, weight_decay
   - 그룹 구성: muon_param_groups.txt
 
+## 하이퍼파라미터
+
+공통 (네 run 동일)
+
+| 항목 | 값 |
+|---|---|
+| 모델 | 6층, 어텐션 헤드 6개, 임베딩 차원 384, 문맥 길이 256글자, 파라미터 10.65M |
+| 배치 크기 | 64 시퀀스 × 256글자 = 16,384 글자/step |
+| dropout | 0.2 |
+| 총 step | 5000 |
+| learning rate(학습률) 일정 | 100 step warmup 후 cosine decay로 최댓값의 1/10까지 |
+| gradient clipping | 1.0 |
+| 정밀도 | bfloat16, torch.compile 사용 |
+| seed | 1337 |
+| 평가 | 250 step마다 train·val 각 200배치 평균 |
+
+옵티마이저별
+
+| 항목 | AdamW | Shampoo | SOAP | Muon |
+|---|---|---|---|---|
+| 적용 범위 | 전체 | 전체 | 전체 | 블록 내부 2D 가중치만, 나머지는 AdamW |
+| learning rate (최댓값) | 1e-3 | 1e-3 (Adam grafting) | 3e-3 | 0.02 (보조 AdamW는 1e-3) |
+| 모멘텀 계수 | β=(0.9, 0.99) | β=(0.9, 0.99) | β=(0.95, 0.95) | momentum 0.95 (보조 AdamW β=(0.9, 0.99)) |
+| weight decay (2D / 1D) | 0.1 / 0 | 0.1 / 0 | 0.01 / 0 | 0.01 (보조 AdamW 0.1 / 0) |
+| epsilon | 1e-8 | 1e-12 (grafting 1e-8) | 1e-8 | 해당 없음 (보조 AdamW 1e-8) |
+| 프리컨디셔너 갱신 주기 | 해당 없음 | 10 step | 10 step | 해당 없음 (Newton-Schulz 5회 반복) |
+| 프리컨디셔너 최대 차원 | 해당 없음 | 1536 | 10000 | 해당 없음 |
+
+값의 출처: AdamW는 nanoGPT 기본값, Shampoo는 Meta README의 Adam grafting 예시에 nanoGPT 값을 맞춘 것, SOAP과 Muon은 각 공식 README 기본값.
+
 ## 결과 표
 | run | final val loss | best val loss (step) | final train loss | train time (s) | wall time incl. eval (s) | ms/step |
 |---|---|---|---|---|---|---|
