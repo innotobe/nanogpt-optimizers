@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="650" viewBox="0 0 680 650" font-family="-apple-system, 'Segoe UI', 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif">
+<title>nanoGPT Shakespeare-char 모델 구조</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect x="0" y="0" width="680" height="650" fill="#FFFFFF"/>
+<g font-size="14" font-weight="500" text-anchor="middle" dominant-baseline="central">
+<rect x="190" y="30" width="300" height="44" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="340" y="52" fill="#444441">입력: 256글자 (vocab 65)</text>
+<rect x="170" y="100" width="340" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="340" y="118" fill="#3C3489">Embedding: wte + wpe</text>
+<text x="340" y="138" fill="#534AB7" font-size="12" font-weight="400">65×384, 256×384 → X: 256×384</text>
+<rect x="60" y="186" width="560" height="240" rx="16" fill="none" stroke="#888780" stroke-width="0.8" stroke-dasharray="5 4"/>
+<text x="340" y="210" fill="#2C2C2A">Transformer block × 6 (pre-LN, residual)</text>
+<rect x="90" y="232" width="240" height="172" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="210" y="256" fill="#085041">Attention</text>
+<g font-size="12" font-weight="400" fill="#0F6E56">
+<text x="210" y="284">LN → c_attn 384→1152</text>
+<text x="210" y="306">Q, K, V: 6 heads × 64</text>
+<text x="210" y="328">causal softmax(QKᵀ/√64)V</text>
+<text x="210" y="350">c_proj 384→384</text>
+<text x="210" y="380">X ← X + Attn(LN(X))</text>
+</g>
+<rect x="360" y="232" width="230" height="172" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="475" y="256" fill="#085041">MLP</text>
+<g font-size="12" font-weight="400" fill="#0F6E56">
+<text x="475" y="284">LN → c_fc 384→1536</text>
+<text x="475" y="306">GELU</text>
+<text x="475" y="328">c_proj 1536→384</text>
+<text x="475" y="380">X ← X + MLP(LN(X))</text>
+</g>
+<rect x="170" y="456" width="340" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="340" y="474" fill="#3C3489">LN_f → lm_head = wteᵀ</text>
+<text x="340" y="494" fill="#534AB7" font-size="12" font-weight="400">weight tying → logits 256×65</text>
+<rect x="190" y="540" width="300" height="44" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="340" y="562" fill="#444441">다음 글자 cross-entropy loss</text>
+</g>
+<g stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)">
+<line x1="340" y1="74" x2="340" y2="98"/>
+<line x1="340" y1="156" x2="340" y2="184"/>
+<line x1="332" y1="318" x2="356" y2="318"/>
+<line x1="340" y1="426" x2="340" y2="454"/>
+<line x1="340" y1="512" x2="340" y2="538"/>
+</g>
+<g font-size="12" dominant-baseline="central" fill="#444441">
+<rect x="110" y="610" width="14" height="14" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="132" y="617">Muon 그룹: 블록 내부 2D 행렬 24개, 10.62M</text>
+<rect x="480" y="610" width="14" height="14" rx="3" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="502" y="617">AdamW 그룹: 0.13M</text>
+</g>
+</svg>

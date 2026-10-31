@@ -6,6 +6,14 @@ nanoGPT shakespeare-char(6 layer, 384 dim, 10.65M params)를 같은 설정으로
 
 **결과와 요약은 [results/README.md](results/README.md)**, **과정(결정·문제·검증·한계)은 [PROCESS.md](PROCESS.md)**, **실험을 둘러싼 질문과 답은 [DISCUSSION.md](DISCUSSION.md)** 에 있다.
 
+## 모델 구조
+
+![model architecture](docs/model_architecture.svg)
+
+청록색은 Muon이 맡은 블록 내부 2D 행렬(24개, 10.62M), 보라색은 보조 AdamW가 맡은 embedding과 출력층(weight tying으로 같은 행렬 wte)이다. 블록 안의 LayerNorm 가중치도 AdamW 그룹이지만 그림에서는 생략했다.
+
+## 결과
+
 ![val loss vs step](results/val_loss_vs_step.png)
 ![val loss vs time](results/val_loss_vs_time.png)
 ![train vs val per optimizer](results/train_val_curves.png)
