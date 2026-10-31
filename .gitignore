@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pt
+out-*/
+nanoGPT/
+Muon/
+SOAP/
+fb_optimizers/
+logs/

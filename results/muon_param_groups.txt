@@ -1,0 +1,43 @@
+=== Muon param group ===
+  transformer.h.0.attn.c_attn.weight       (1152, 384)
+  transformer.h.0.attn.c_proj.weight       (384, 384)
+  transformer.h.0.mlp.c_fc.weight          (1536, 384)
+  transformer.h.0.mlp.c_proj.weight        (384, 1536)
+  transformer.h.1.attn.c_attn.weight       (1152, 384)
+  transformer.h.1.attn.c_proj.weight       (384, 384)
+  transformer.h.1.mlp.c_fc.weight          (1536, 384)
+  transformer.h.1.mlp.c_proj.weight        (384, 1536)
+  transformer.h.2.attn.c_attn.weight       (1152, 384)
+  transformer.h.2.attn.c_proj.weight       (384, 384)
+  transformer.h.2.mlp.c_fc.weight          (1536, 384)
+  transformer.h.2.mlp.c_proj.weight        (384, 1536)
+  transformer.h.3.attn.c_attn.weight       (1152, 384)
+  transformer.h.3.attn.c_proj.weight       (384, 384)
+  transformer.h.3.mlp.c_fc.weight          (1536, 384)
+  transformer.h.3.mlp.c_proj.weight        (384, 1536)
+  transformer.h.4.attn.c_attn.weight       (1152, 384)
+  transformer.h.4.attn.c_proj.weight       (384, 384)
+  transformer.h.4.mlp.c_fc.weight          (1536, 384)
+  transformer.h.4.mlp.c_proj.weight        (384, 1536)
+  transformer.h.5.attn.c_attn.weight       (1152, 384)
+  transformer.h.5.attn.c_proj.weight       (384, 384)
+  transformer.h.5.mlp.c_fc.weight          (1536, 384)
+  transformer.h.5.mlp.c_proj.weight        (384, 1536)
+  -> 24 tensors, 10,616,832 params
+=== Aux AdamW param group ===
+  transformer.wte.weight                   (65, 384)  wd=0.10
+  transformer.wpe.weight                   (256, 384)  wd=0.10
+  transformer.h.0.ln_1.weight              (384,)  wd=0.00
+  transformer.h.0.ln_2.weight              (384,)  wd=0.00
+  transformer.h.1.ln_1.weight              (384,)  wd=0.00
+  transformer.h.1.ln_2.weight              (384,)  wd=0.00
+  transformer.h.2.ln_1.weight              (384,)  wd=0.00
+  transformer.h.2.ln_2.weight              (384,)  wd=0.00
+  transformer.h.3.ln_1.weight              (384,)  wd=0.00
+  transformer.h.3.ln_2.weight              (384,)  wd=0.00
+  transformer.h.4.ln_1.weight              (384,)  wd=0.00
+  transformer.h.4.ln_2.weight              (384,)  wd=0.00
+  transformer.h.5.ln_1.weight              (384,)  wd=0.00
+  transformer.h.5.ln_2.weight              (384,)  wd=0.00
+  transformer.ln_f.weight                  (384,)  wd=0.00
+  -> 15 tensors, 128,256 params
