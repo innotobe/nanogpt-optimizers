@@ -4,7 +4,7 @@ nanoGPT shakespeare-char(6 layer, 384 dim, 10.65M params)를 같은 설정으로
 네 가지 옵티마이저를 발표 순서대로 비교한 실험: AdamW(2017) → Shampoo(2018) → SOAP(2024.9) → Muon(2024.10).
 단일 RTX 5060(8GB), 2026-10-31.
 
-**결과와 요약은 [results/README.md](results/README.md)** 에 있다.
+**결과와 요약은 [results/README.md](results/README.md)**, **과정(결정·문제·검증·한계)은 [PROCESS.md](PROCESS.md)** 에 있다.
 
 ![val loss vs step](results/val_loss_vs_step.png)
 ![val loss vs time](results/val_loss_vs_time.png)
