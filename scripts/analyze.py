@@ -3,7 +3,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 R = 'results'
 import os
-all_runs = [('AdamW', 'adamw', '#4C6EF5'), ('Muon (+aux AdamW)', 'muon', '#E8590C'), ('SOAP', 'soap', '#2F9E44'), ('Shampoo (Adam graft)', 'shampoo', '#9C36B5')]
+all_runs = [('AdamW (2017)', 'adamw', '#4C6EF5'), ('Shampoo (2018, Adam graft)', 'shampoo', '#9C36B5'), ('SOAP (2024)', 'soap', '#2F9E44'), ('Muon (2024, +aux AdamW)', 'muon', '#E8590C')]
 runs = {k: f'{R}/log_{f}.csv' for k, f, _ in all_runs if os.path.exists(f'{R}/log_{f}.csv')}
 colors = {k: c for k, _, c in all_runs}
 dfs = {k: pd.read_csv(v) for k, v in runs.items()}

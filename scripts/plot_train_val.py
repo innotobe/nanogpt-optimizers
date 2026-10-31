@@ -2,7 +2,7 @@ import pandas as pd, matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 R = 'results'
-runs = [('AdamW', 'adamw', '#4C6EF5'), ('Muon (+aux AdamW)', 'muon', '#E8590C'), ('SOAP', 'soap', '#2F9E44'), ('Shampoo (Adam graft)', 'shampoo', '#9C36B5')]
+runs = [('AdamW (2017)', 'adamw', '#4C6EF5'), ('Shampoo (2018, Adam graft)', 'shampoo', '#9C36B5'), ('SOAP (2024)', 'soap', '#2F9E44'), ('Muon (2024, +aux AdamW)', 'muon', '#E8590C')]
 fig, axes = plt.subplots(2, 2, figsize=(10, 7), dpi=150, sharex=True, sharey=True)
 for ax, (name, f, c) in zip(axes.flat, runs):
     df = pd.read_csv(f'{R}/log_{f}.csv')
