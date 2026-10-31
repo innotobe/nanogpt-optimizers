@@ -67,6 +67,7 @@ nanoGPT README의 A100 기준값은 best val 1.4697 (우리 AdamW 1.4659와 일�
 - log_{adamw,shampoo,soap,muon}.csv: step, train loss, val loss, 누적 학습 시간, 누적 전체 시간
 - val_loss_vs_step.png, val_loss_vs_time.png (4개 run), train_val_curves.png (옵티마이저별 train vs val)
 - sample_*.txt: best-val checkpoint에서 500자 생성(temperature 0.8, top_k 200, seed 1337)
+- next_char_eval.md: val set 전체에 대한 다음 글자 정확도·perplexity, 실제 구절 이어 쓰기, 위치별 top-3 확률
 - out-*/: best-val checkpoint (out-shampoo는 옵티마이저 상태를 제거하고 모델만 저장)
 
 ## 요약
